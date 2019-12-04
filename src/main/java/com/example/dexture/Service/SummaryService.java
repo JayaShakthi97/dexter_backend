@@ -145,14 +145,14 @@ public class SummaryService {
 
     public List expectedAndCurrent(int year) {
         List<ExpectedCultivation> expectedCultivations = expectedCultivationRepo.getAllByExpectedYearOrderByType(year);
-        List<FutureCultivationSummary> harvestSummaries = futureSummaryRepo.getAllByYearOrderByType(year);
+        List<FutureCultivationSummary> futureCultivationSummaries = futureSummaryRepo.getAllByYearOrderByType(year);
 
         List<PredictionSummary> predictionSummaryList = new ArrayList<>();
         expectedCultivations.forEach(expectedCultivation -> {
             PredictionSummary predictionSummary = new PredictionSummary(
                     expectedCultivation.getType(), expectedCultivation.getExpectedQuantity());
             boolean found = false;
-            for (FutureCultivationSummary futureCultivationSummary : harvestSummaries) {
+            for (FutureCultivationSummary futureCultivationSummary : futureCultivationSummaries) {
                 if (futureCultivationSummary.getType().equals(predictionSummary.getType())) {
                     predictionSummary.setCurrentQ(futureCultivationSummary.getTotalQuantity());
                     futureCultivationSummary.setExpected(true);
@@ -165,7 +165,7 @@ public class SummaryService {
                 predictionSummaryList.add(predictionSummary);
         });
 
-        for (FutureCultivationSummary futureCultivationSummary : harvestSummaries) {
+        for (FutureCultivationSummary futureCultivationSummary : futureCultivationSummaries) {
             if (!(futureCultivationSummary.isExpected()))
                 predictionSummaryList.add(new PredictionSummary(
                         futureCultivationSummary.getType(), futureCultivationSummary.getTotalQuantity(), 0));
