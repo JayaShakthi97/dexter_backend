@@ -21,7 +21,7 @@ public class AdminController {
 
     @GetMapping("/admin/values")
     public String testing() {
-        return ("Admin working success");
+        return ("Admin working success *_*");
     }
 
     @PostMapping("/admin/login")
