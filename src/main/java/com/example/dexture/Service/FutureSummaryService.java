@@ -19,12 +19,12 @@ public class FutureSummaryService {
     public void add(FutureCultivation futureCultivation) {
         String type = futureCultivation.getType();
         int year = futureCultivation.getYear();
+        System.out.println(type + " " + year);
         if (futureSummaryRepo.existsByTypeAndYear(type, year)) {
             FutureCultivationSummary futureCultivationSummary = futureSummaryRepo.getByTypeAndYear(type, year);
             futureCultivationSummary.add(futureCultivation.getQuantity());
             futureSummaryRepo.save(futureCultivationSummary);
-        }
-        futureSummaryRepo.save(new FutureCultivationSummary(futureCultivation));
+        } else futureSummaryRepo.save(new FutureCultivationSummary(futureCultivation));
     }
 
     public List getFutureSummary(int year) {

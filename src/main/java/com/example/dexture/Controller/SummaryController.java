@@ -24,12 +24,12 @@ public class SummaryController {
 
     @GetMapping("/types")
     public List<String> getAllTypes() {
-        return summaryService.getAllSummaryTypes();
+        return harvestSummaryService.getAllSummaryTypes();
     }
 
     @GetMapping("/{type}")
-    public List<Summary> getSummaryOfType(@PathVariable String type) {
-        return summaryService.getSummaryFromType(type);
+    public List getSummaryOfType(@PathVariable String type) {
+        return harvestSummaryService.getTypeSummary(type);
     }
 
     @GetMapping("/year/{year}")
@@ -48,7 +48,7 @@ public class SummaryController {
     }
 
     @GetMapping("/coverage/{year}")
-    public ResponseEntity expectedAndCurrent(@PathVariable int year){
+    public ResponseEntity expectedAndCurrent(@PathVariable int year) {
         return ResponseEntity.ok(summaryService.expectedAndCurrent(year));
     }
 

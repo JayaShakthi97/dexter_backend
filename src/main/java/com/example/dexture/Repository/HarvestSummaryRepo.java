@@ -15,6 +15,11 @@ public interface HarvestSummaryRepo extends CrudRepository<HarvestSummary, Integ
 
     List<HarvestSummary> getAllByYearOrderByType(int year);
 
+    @Query("select distinct summary.type from HarvestSummary summary")
+    List<String> getAllTypes();
+
+    List<HarvestSummary> getAllByType(String type);
+
     /*@Query(value = "select harvest_summary.total_quantity as totalHarvest, future_cultivation_summary.total_quantity as totalFuture, " +
             "harvest_summary.type as harvest, future_cultivation_summary.type as future " +
             "from harvest_summary full join future_cultivation_summary on future_cultivation_summary.type = harvest_summary.type " +

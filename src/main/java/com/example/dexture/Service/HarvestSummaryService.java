@@ -64,4 +64,11 @@ public class HarvestSummaryService {
 //    public List joinSummary(int year){
 //        return harvestSummaryRepo.joinSummary(year, year + 1);
 //    }
+    public List<String> getAllSummaryTypes(){
+        return harvestSummaryRepo.getAllTypes();
+    }
+
+    public List getTypeSummary(String type){
+        return harvestSummaryRepo.getAllByType(type);
+    }
 }
